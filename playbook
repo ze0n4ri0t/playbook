@@ -37,3 +37,8 @@
         name: nginx
         state: restarted
      
+    - name: insert line in sysctl.conf fs.files-max=1204000
+      lineinfile: dest=/etc/sysctl.conf line="fs.files-max=1204000"
+
+    - name: insert into sysctl.conf
+      lineinfile: dest=/etc/sysctl.conf line="somaxconn=65535"
