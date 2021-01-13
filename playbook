@@ -1,0 +1,34 @@
+- hosts: all
+  tasks:
+    - name: clear var/www
+      file:
+        path: /var/www/html
+        state: absent
+
+    - name: install nginx
+      apt: pkg=nginx state=latest update_cache=true
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
+    - name: copy the nginx config file and restart nginx
+      copy:
+        src: static_site.cfg
+        dest: /etc/nginx/sites-available/static_site.cfg
+    - name: create symlink
+      file:
+        src: /etc/nginx/sites-available/static_site.cfg
+        dest: /etc/nginx/sites-enabled/default
+        state: link
+
+    - name: Clone a private repository
+      git:
+        repo:  https://github.com/ze0n4ri0t/web-page/index.nginx-debian.html
+        version: master
+        dest: /var/www/
+
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+    
