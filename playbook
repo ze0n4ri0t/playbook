@@ -1,18 +1,5 @@
 - hosts: all
   tasks:
-#    - name: clear var/www
-#      file:
-#        path: "{{item}}"
-#      with_items:
-#        - /var/www/html/index.nginx-debian.html
-#        - /var/www/html
-#      state: absent
-
-
-    - name: clear www
-      file:
-        path: /var/www/html
-        state: absent
 
     - name: instal wget
       apt: pkg=wget state=present
@@ -27,11 +14,6 @@
         name: nginx
         state: started
 
-    - name: clear www
-      file:
-        path: /var/www/html/index.nginx-debian.html
-        state: absent
-
     - name: copy the nginx config file and restart nginx
       copy:
         src: static_site.cfg
@@ -42,7 +24,17 @@
         dest: /etc/nginx/sites-enabled/default
         state: link
 
-    - name: Clone a private repository
+    - name: clear www
+      file:
+        path: /var/www/html/index.nginx-debian.html
+        state: absent
+
+    - name: clear www
+      file:
+        path: /var/www/html
+        state: absent
+
+     - name: Clone a private repository
       git:
         repo:  https://github.com/ze0n4ri0t/web-page/
         version: master
