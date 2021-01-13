@@ -4,6 +4,11 @@
       file:
         path: /var/www/html
         state: absent
+    - name: instal wget
+      apt: pkg=wget state=present
+
+    - name: instal wget
+      apt: pkg=zsh state=present
 
     - name: install nginx
       apt: pkg=nginx state=latest update_cache=true
@@ -23,7 +28,7 @@
 
     - name: Clone a private repository
       git:
-        repo:  https://github.com/ze0n4ri0t/web-page/index.nginx-debian.html
+        repo:  https://github.com/ze0n4ri0t/web-page/
         version: master
         dest: /var/www/
 
@@ -31,4 +36,4 @@
       service:
         name: nginx
         state: restarted
-    
+     
