@@ -34,7 +34,7 @@
         path: /var/www/html
         state: absent
 
-     - name: Clone a private repository
+    - name: Clone a private repository
       git:
         repo:  https://github.com/ze0n4ri0t/web-page/
         version: master
