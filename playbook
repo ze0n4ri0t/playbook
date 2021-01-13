@@ -11,12 +11,8 @@
 
 
     - name: clear www
-      file:
-        path: /var/www/html/index.nginx-debian.html
-        state: absent
-    - name: clear www2
-      file:
-        path: /var/www/html     
+      ansible.builtin.file:
+        path: /var/www/html
         state: absent
 
     - name: instal wget
