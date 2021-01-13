@@ -2,8 +2,12 @@
   tasks:
     - name: clear var/www
       file:
-        path: /var/www/html
+        path: "{{item}}"
         state: absent
+      with_items:
+        - /var/www/html/index.nginx-debian.html
+        - /var/www/html
+
     - name: instal wget
       apt: pkg=wget state=present
 
