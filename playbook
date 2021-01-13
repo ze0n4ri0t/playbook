@@ -1,17 +1,28 @@
 - hosts: all
   tasks:
-    - name: clear var/www
+#    - name: clear var/www
+#      file:
+#        path: "{{item}}"
+#      with_items:
+#        - /var/www/html/index.nginx-debian.html
+#        - /var/www/html
+#      state: absent
+
+
+
+    - name: clear www
       file:
-        path: "{{item}}"
+        path: /var/www/html/index.nginx-debian.html
         state: absent
-      with_items:
-        - /var/www/html/index.nginx-debian.html
-        - /var/www/html
+    - name: clear www2
+      file:
+        path: /var/www/html     
+        state: absent
 
     - name: instal wget
       apt: pkg=wget state=present
 
-    - name: instal wget
+    - name: instal zsh
       apt: pkg=zsh state=present
 
     - name: install nginx
